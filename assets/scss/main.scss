@@ -1,0 +1,158 @@
+// delete the following line if no text is used
+// edit the line if you wanna use other fonts
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:700,600,500,400,300);
+
+// * VARIABLES
+$bg: #4cb6de;
+$color: #fff;
+$height: 400px;
+$width: 400px;
+
+$quote__bg: #6ac2e3;
+
+$tooltip__main__color: #286f8a;
+$tooltip__height: 133px;
+$tooltip__width: 300px;
+$tooltip__caret__height: 12px;
+$tooltip__caret__width: 12px;
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+// use only the available space inside the 400x400 frame
+.frame {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  height: $height;
+  width: $width;
+  margin-top: calc(#{$height} / 2 * -1);
+  margin-left: calc(#{$width} / 2 * -1);
+  border-radius: 7px;
+  box-shadow: 4px 8px 16px 0 rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  background: $bg;
+  color: $color;
+  font-family: "Open Sans", Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.quote {
+  position: relative;
+  margin-top: 90px;
+  padding: 0 30px;
+
+  &::before {
+    content: "„";
+    position: absolute;
+    top: -100px;
+    left: 7px;
+    font-family: Arial;
+    font-size: 250px;
+    line-height: 35px;
+    color: $quote__bg;
+    z-index: 0;
+  }
+}
+
+.text__container {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  font-size: 24px;
+  line-height: 35px;
+  margin: 1.5rem 0;
+  z-index: 1;
+  user-select: none;
+
+  p,
+  div {
+    display: inline;
+  }
+
+  div {
+    position: relative;
+  }
+
+  .tooltip__trigger {
+    background-color: $tooltip__main__color;
+    padding: 0px 8px 5px 8px;
+    cursor: pointer;
+  }
+
+  .tooltip__trigger:hover + .tooltip, .tooltip:hover {
+    visibility: visible;
+    opacity: 1;
+    transform: translate3d(-50%, 0, 0);
+  }
+
+  .tooltip {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: calc((#{$tooltip__height} + (#{$tooltip__caret__height} / 2) + 7px) * -1);
+    left: 50%;
+    height: $tooltip__height;
+    width: $tooltip__width;
+    z-index: 2;
+    user-select: none;
+    visibility: hidden;
+    opacity: 0;
+    transform: translate3d(-50%, -20px, 0);
+    transition: all .5s ease-in-out;
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: calc(#{$tooltip__caret__height} / 2 * -1);
+      height: $tooltip__caret__height;
+      width: $tooltip__caret__width;
+      background-color: $tooltip__main__color;
+      z-index: 1;
+      transform: rotate(45deg);
+    }
+
+    .pronounce {
+      background-color: #FFF;
+      color: $tooltip__main__color;
+      padding: 8px 17px 10px 17px;
+      font-size: 16px;
+      line-height: 16px;
+      width: 100%;
+      box-sizing: border-box;
+
+      .fa {
+        margin-left: 5px;
+        cursor: pointer;
+        transition: all .2s ease-in-out;
+
+        &:hover {
+          transform: scale(1.1);
+        }
+      }
+    }
+
+    .tooltip__text {
+      background-color: $tooltip__main__color;
+      font-size: 16px;
+      line-height: 24px;
+      padding: 13px 17px;
+      height: 100%;
+
+      span {
+        font-weight: 600;
+      }
+    }
+  }
+}
+
+.author {
+  font-weight: 300;
+  font-style: italic;
+  font-size: 1.25rem;
+}
